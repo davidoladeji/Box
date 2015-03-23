@@ -76,6 +76,12 @@
             <version>${spring.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>3.0-alpha-1</version>
+        </dependency>
+
 
         <dependency>
             <groupId>javax.servlet.jsp</groupId>

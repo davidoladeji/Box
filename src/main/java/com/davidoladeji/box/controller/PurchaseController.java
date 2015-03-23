@@ -247,7 +247,7 @@ public class PurchaseController {
                 List<ProductStock> productStock = productStockRepository.findByProductIdAndWarehouse_Id(item.getProductId(),
                         order.getWarehouse().getId());
                 int qty = item.getQuantity();
-                // TODO add transfer status based on avaialbility at warehouse chosen
+
                 //First get the ware house
                 Warehouse choosenWarehouse = warehouseRepository.findOne(order.getWarehouse().getId());
 
@@ -255,7 +255,7 @@ public class PurchaseController {
 
                int count = 0;
 
-                //TODO get Item stock at specific warehouse
+
                 if(productStock.size() == 0){
                     //If the productSock List is empty
 
