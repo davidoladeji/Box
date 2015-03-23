@@ -1,9 +1,6 @@
 package com.davidoladeji.box.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
@@ -12,26 +9,52 @@ import java.util.List;
  */
 
 @XmlRootElement(name = "Distances")
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Distances {
 
 
+    Distance distance;
+
+    private int count;
+
     private List<Distance> distances;
-
-    @XmlElement
-    private String distance;
-
-    @XmlElement
-    private String townone;
-
-    @XmlElement
-    private String towntwo;
-
-    @XmlElement
-    private String distanceInMiles;
 
 
     public Distances() {
+    }
+
+    public Distances(List<Distance> distances) {
+        this.distances = distances;
+        this.count = distances.size();
+    }
+
+    public Distances(Distance distance) {
+        this.distance = distance;
+    }
+
+    public List<Distance> getDistances() {
+
+        return distances;
+    }
+
+    public void setDistances(List<Distance> distances) {
+        this.distances = distances;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+
+    public Distance getDistance() {
+        return distance;
+    }
+
+    public void setDistance(Distance distance) {
+        this.distance = distance;
     }
 
 

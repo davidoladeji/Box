@@ -486,7 +486,7 @@ $(function() {
 	$('.timepicker').timeEntry({
 		show24Hours: true, // 24 hours format
 		showSeconds: true, // Show seconds?
-		spinnerImage: 'images/forms/spinnerUpDown.png', // Arrows image
+		spinnerImage: 'img/forms/spinnerUpDown.png', // Arrows image
 		spinnerSize: [19, 30, 0], // Image size
 		spinnerIncDecOnly: true // Only up and down arrows
 	});
@@ -498,7 +498,7 @@ $(function() {
 		defaultDate: +7,
 		autoSize: true,
 		appendText: '(dd-mm-yyyy)',
-		dateFormat: 'dd-mm-yy',
+		dateFormat: 'yyyy-MM-dd',
 	});	
 	
 	$( ".datepickerInline" ).datepicker({ 

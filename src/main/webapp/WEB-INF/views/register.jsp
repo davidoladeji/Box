@@ -5,7 +5,7 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <%@ page session="true" %>
 
-<%@ include file="template/header.html" %>
+<%@ include file="template/header.jsp" %>
 <div class="row">
     <!-- Register Account-->
     <div class="span10 pull-right">

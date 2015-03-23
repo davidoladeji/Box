@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.transaction.Transactional;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Daveola on 2/16/2015.
@@ -18,5 +19,6 @@ import java.util.Date;
 public interface AccountRepository extends JpaRepository<Account, Long> {
 
     Account findByUsername(String username);
+    List<Account> findByRoleId(int id);
 
 }

@@ -55,7 +55,7 @@ public class ProductsController {
 
 
     @RequestMapping(value = "/editProduct/{id}", method = RequestMethod.GET)
-    public ModelAndView adminEditProductPage(ModelAndView model, @PathVariable("id") Long id,  BindingResult result) {
+    public ModelAndView adminEditProductPage(ModelAndView model, @PathVariable("id") Long id, BindingResult result) {
         model.addObject("title", "Products Page");
         model.setViewName("admin/editProduct");
         model.addObject("product", productRepository.findOne(id));
@@ -63,7 +63,7 @@ public class ProductsController {
     }
 
     @RequestMapping(value = "/editProduct", method = RequestMethod.POST)
-    public ModelAndView adminEditProductPost(ModelAndView model, @RequestParam Product product, @RequestParam Long id, final RedirectAttributes redirectAttributes,  BindingResult result) {
+    public ModelAndView adminEditProductPost(ModelAndView model, @RequestParam Product product, @RequestParam Long id, final RedirectAttributes redirectAttributes, BindingResult result) {
         model.addObject("title", "Products Page");
 
         if (result.hasErrors()) {
@@ -71,8 +71,8 @@ public class ProductsController {
             model.setViewName("redirect:/admin/editProduct");
         } else {
 
-            if (product.getId() == null && productRepository.findOne(id) != null){
-              product = productRepository.findOne(id);
+            if (product.getId() == null && productRepository.findOne(id) != null) {
+                product = productRepository.findOne(id);
             }
             productRepository.save(product);
             model.setViewName("redirect:/admin/products");

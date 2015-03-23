@@ -1,7 +1,7 @@
 package com.davidoladeji.box.model;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -11,8 +11,8 @@ import java.util.List;
 @Table(name = "orders")
 public class Orders {
 
-    @OneToMany
-    List<Orderitem> orderItems;
+    @OneToMany(cascade = CascadeType.ALL)
+    List<Orderitem> orderItem;
     @ManyToOne
     Account account;
     @OneToOne
@@ -22,13 +22,12 @@ public class Orders {
     @Column(name = "id")
     private Long id;
     @Column(name = "order_date")
-    private Date orderDate;
-    @Column(name = "order_time")
-    private Date orderTime;
+    private Timestamp orderDate;
     @Column(name = "order_status_id")
     private int orderStatus;
     @Column(name = "price")
     private Double price;
+
 
     public Long getId() {
         return id;
@@ -38,23 +37,6 @@ public class Orders {
         this.id = id;
     }
 
-
-    public Date getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
-    }
-
-
-    public Date getOrderTime() {
-        return orderTime;
-    }
-
-    public void setOrderTime(Date orderTime) {
-        this.orderTime = orderTime;
-    }
 
     public int getOrderStatus() {
         return orderStatus;
@@ -73,6 +55,13 @@ public class Orders {
         this.price = price;
     }
 
+    public Timestamp getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(Timestamp orderDate) {
+        this.orderDate = orderDate;
+    }
 
     public Warehouse getWarehouse() {
         return warehouse;
@@ -90,11 +79,11 @@ public class Orders {
         this.account = account;
     }
 
-    public List<Orderitem> getOrderItems() {
-        return orderItems;
+    public List<Orderitem> getOrderItem() {
+        return orderItem;
     }
 
-    public void setOrderItems(List<Orderitem> orderItems) {
-        this.orderItems = orderItems;
+    public void setOrderItem(List<Orderitem> orderItem) {
+        this.orderItem = orderItem;
     }
 }

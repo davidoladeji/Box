@@ -4,6 +4,7 @@ package com.davidoladeji.box.controller;
 import com.davidoladeji.box.model.Account;
 import com.davidoladeji.box.model.Product;
 import com.davidoladeji.box.model.Search;
+import com.davidoladeji.box.model.Warehouse;
 import com.davidoladeji.box.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -145,6 +146,8 @@ public class HomeController {
         model.addObject("title", "Order");
         model.addObject("breadcrumb", "Order");
 
+        List<Warehouse> warehousesList = warehouseRepository.findAll();
+        model.addObject("warehousesList", warehousesList);
         model.setViewName("orders");
         return model;
     }
@@ -154,6 +157,8 @@ public class HomeController {
         model.addObject("title", "Cart");
         model.addObject("breadcrumb", "Cart");
 
+        List<Warehouse> warehousesList = warehouseRepository.findAll();
+        model.addObject("warehousesList", warehousesList);
         model.setViewName("cart");
         return model;
     }

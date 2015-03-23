@@ -11,17 +11,22 @@ import java.util.List;
 public class Orderitem {
 
 
+    @OneToMany
+    List<Orders> orders;
     @OneToOne
     private Product product;
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
     @Basic
-    @Column(name = "order_id")
-    private Long order_id;
-    @Basic
     @Column(name = "price")
     private Double price;
+
+    @Basic
+    @Column(name = "orders_id")
+    private Long orders_id;
+
     @Basic
     @Column(name = "transfer_id", insertable = false, updatable = false)
     private int transferId;
@@ -29,22 +34,20 @@ public class Orderitem {
     private int quantity;
     @Column(name = "product_id", insertable = false, updatable = false)
     private Long productId;
-
     @OneToOne
     private Transfer transfer;
-    @OneToMany
-    List<Orders> order;
 
     public Orderitem() {
     }
 
     public Orderitem(Long orderId, Double price, int quantity, Long productId) {
-        this.order_id = orderId;
+        this.orders_id = orderId;
         this.price = price;
-        this.transferId = transferId;
+
         this.quantity = quantity;
         this.productId = productId;
     }
+
 
     public Orderitem(Long productId) {
         this.productId = productId;
@@ -59,15 +62,6 @@ public class Orderitem {
     }
 
 
-    public Long getOrder_id() {
-        return order_id;
-    }
-
-    public void setOrder_id(Long orderId) {
-        this.order_id = orderId;
-    }
-
-
     public Double getPrice() {
         return price;
     }
@@ -76,6 +70,13 @@ public class Orderitem {
         this.price = price;
     }
 
+    public Long getOrders_id() {
+        return orders_id;
+    }
+
+    public void setOrders_id(Long orders_id) {
+        this.orders_id = orders_id;
+    }
 
     public int getTransferId() {
         return transferId;
@@ -118,5 +119,18 @@ public class Orderitem {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+
+    public List<Orders> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Orders> orders) {
+        this.orders = orders;
+    }
+
+    public double getTotalItemPrice() {
+        return this.getQuantity() * this.getPrice();
     }
 }

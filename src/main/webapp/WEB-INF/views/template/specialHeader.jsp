@@ -1,3 +1,5 @@
+<%@page import="com.davidoladeji.box.model.Orderitem"%>
+<%@page import="com.davidoladeji.box.model.Cart"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -16,6 +18,7 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300italic,400italic,600,600italic' rel='stylesheet'
           type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Crete+Round' rel='stylesheet' type='text/css'>
+
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
@@ -35,7 +38,7 @@
             <div class="row">
                 <div class="span12">
                     <a href="/index" class="logo pull-left"><img src="img/logo.png" alt="Buy The Box"
-                                                            title="Buy The Box"></a>
+                                                                 title="Buy The Box"></a>
                     <!-- Top Nav Start -->
                     <div class="pull-left">
                         <div class="navbar" id="topnav">
@@ -69,39 +72,37 @@
             <div class="pull-right">
                 <ul class="nav topcart pull-left">
                     <li class="dropdown hover carticon ">
-                        <a href="#" class="dropdown-toggle"> Shopping Cart <span class="label label-orange font14">1 item(s)</span>
-                            - $589.50 <b class="caret"></b></a>
+
+                        <% Cart currentCart = (Cart)session.getAttribute("cart"); %>
+
+                        <% if (currentCart != null){ %>
+                        <a href="#" class="dropdown-toggle"> Shopping Cart <span class="label label-orange font14"><%= currentCart.getOrderItems().size() %> item(s)</span>
+                            - &pound;<%= currentCart.getTotal() %><b class="caret"></b></a>
                         <ul class="dropdown-menu topcartopen ">
                             <li>
                                 <table>
                                     <tbody>
+
+                                    <% for (Orderitem item : currentCart.getOrderItems()){ %>
                                     <tr>
-                                        <td class="image"><a href="product.html"><img width="50" height="50"
-                                                                                      src="img/prodcut-40x40.jpg"
+                                        <td class="image"><a href="#"><img width="50" height="50"
+                                                                                      src="img/product-40x40.png"
                                                                                       alt="product" title="product"></a>
                                         </td>
-                                        <td class="name"><a href="product.html">MacBook</a></td>
-                                        <td class="quantity">x&nbsp;1</td>
-                                        <td class="total">$589.50</td>
+                                        <td class="name"><a href="#"><%= item.getProduct().getName() %></a></td>
+                                        <td class="quantity">x&nbsp;<%= item.getQuantity() %></td>
+                                        <td class="total">&pound;<%= item.getTotalItemPrice() %></td>
                                         <td class="remove"><i class="icon-remove"></i></td>
                                     </tr>
-                                    <tr>
-                                        <td class="image"><a href="product.html"><img width="50" height="50"
-                                                                                      src="img/prodcut-40x40.jpg"
-                                                                                      alt="product" title="product"></a>
-                                        </td>
-                                        <td class="name"><a href="product.html">MacBook</a></td>
-                                        <td class="quantity">x&nbsp;1</td>
-                                        <td class="total">$589.50</td>
-                                        <td class="remove"><i class="icon-remove "></i></td>
-                                    </tr>
+                                    <%} %>
+
                                     </tbody>
                                 </table>
                                 <table>
                                     <tbody>
                                     <tr>
                                         <td class="textright"><b>Sub-Total:</b></td>
-                                        <td class="textright">$500.00</td>
+                                        <td class="textright">&pound;<%= currentCart.getSubTotal() %></td>
                                     </tr>
                                     <tr>
                                         <td class="textright"><b>Eco Tax (-2.00):</b></td>
@@ -109,11 +110,11 @@
                                     </tr>
                                     <tr>
                                         <td class="textright"><b>VAT (17.5%):</b></td>
-                                        <td class="textright">$87.50</td>
+                                        <td class="textright">&pound;<%= currentCart.getVatTotal() %></td>
                                     </tr>
                                     <tr>
                                         <td class="textright"><b>Total:</b></td>
-                                        <td class="textright">$589.50</td>
+                                        <td class="textright">&pound;<%= currentCart.getTotal() %></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -123,6 +124,11 @@
                                 </div>
                             </li>
                         </ul>
+                        <% }else{ // if end %>
+
+                        <a href="#" class="dropdown-toggle"> Shopping Cart is Empty
+                        </a>
+                        <%} %>
                     </li>
                 </ul>
             </div>

@@ -15,7 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@SessionAttributes({"countsList"}) // The numbers showing various numbers/counts of entities across the backend
+@SessionAttributes({"countsList", "currentUsername"})
+// The numbers showing various numbers/counts of entities across the backend
 public class AdminController {
 
     @Autowired
@@ -25,23 +26,19 @@ public class AdminController {
     OrderRepository orderRepository;
 
     @Autowired
+    OrderStatusRepository orderStatusRepository;
+
+    @Autowired
     ProductRepository productRepository;
 
     @Autowired
     TransferRepository transferRepository;
 
     @Autowired
+    TransferStatusRepository transferStatusRepository;
+
+    @Autowired
     WarehouseRepository warehouseRepository;
-
-    @Autowired
-    EmployeeRepository employeeRepository;
-
-
-    @Autowired
-    DriverRepository driverRepository;
-
-    @Autowired
-    CustomerRepository customerRepository;
 
 
     /**
@@ -69,13 +66,13 @@ public class AdminController {
         int numWarehouses = warehouseRepository.findAll().size();
         countsListModel.add(4, numWarehouses);
 
-        int numEmployees = employeeRepository.findAll().size();
+        int numEmployees = accountRepository.findByRoleId(3).size();
         countsListModel.add(5, numEmployees);
 
-        int numDrivers = driverRepository.findAll().size();
+        int numDrivers = accountRepository.findByRoleId(4).size();
         countsListModel.add(6, numDrivers);
 
-        int numCustomers = customerRepository.findAll().size();
+        int numCustomers = accountRepository.findByRoleId(2).size();
         countsListModel.add(7, numCustomers);
 
         return countsListModel;
@@ -83,15 +80,19 @@ public class AdminController {
 
 
     @RequestMapping(value = {"/admin", "/admin/dashboard"}, method = RequestMethod.GET)
-    public ModelAndView adminDashboard(ModelAndView model, Principal user) {
+    public ModelAndView adminDashboard(ModelAndView model, Principal currentUsername) {
         model.addObject("title", "Dashboard!");
 
-        model.addObject("username", user.getName());
+        model.addObject("currentUsername", currentUsername.getName());
 
-        model.addObject("transferstatuses", transferRepository.findAll());
+
+        model.addObject("orderstatuses", orderStatusRepository.findAll());
+        model.addObject("transferstatuses", transferStatusRepository.findAll());
         model.addObject("ordersList", orderRepository.findAll());
         model.addObject("warehousesList", warehouseRepository.findAll());
         model.setViewName("admin/dashboard");
         return model;
     }
+
+
 }

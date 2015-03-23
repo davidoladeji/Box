@@ -6,7 +6,7 @@
 <%@ page session="true" %>
 
 
-<%@ include file="template/header.html" %>
+<%@ include file="template/header.jsp" %>
 <!-- Header End -->
 
 <div id="maincontainer">
@@ -41,19 +41,19 @@
             <h2 class="heading2"><span>Best Seller</span></h2>
             <ul class="bestseller">
               <li>
-                <img width="50" height="50" src="img/prodcut-40x40.jpg" alt="product" title="product">
+                <img width="50" height="50" src="img/product-40x40.png" alt="product" title="product">
                 <a class="productname" href="product.html"> Product Name</a>
                 <span class="procategory">Home Utensils</span>
                 <span class="price">$250</span>
               </li>
               <li>
-                <img width="50" height="50" src="img/prodcut-40x40.jpg" alt="product" title="product">
+                <img width="50" height="50" src="img/product-40x40.png" alt="product" title="product">
                 <a class="productname" href="product.html"> Product Name</a>
                 <span class="procategory">Electronics</span>
                 <span class="price">$250</span>
               </li>
               <li>
-                <img width="50" height="50" src="img/prodcut-40x40.jpg" alt="product" title="product">
+                <img width="50" height="50" src="img/product-40x40.png" alt="product" title="product">
                 <a class="productname" href="product.html"> Product Name</a>
                 <span class="procategory">Electronics</span>
                 <span class="price">$250</span>
@@ -65,19 +65,19 @@
             <h2 class="heading2"><span>Latest Products</span></h2>
             <ul class="bestseller">
               <li>
-                <img width="50" height="50" src="img/prodcut-40x40.jpg" alt="product" title="product">
+                <img width="50" height="50" src="img/product-40x40.png" alt="product" title="product">
                 <a class="productname" href="product.html"> Product Name</a>
                 <span class="procategory">Women Accessories</span>
                 <span class="price">$250</span>
               </li>
               <li>
-                <img width="50" height="50" src="img/prodcut-40x40.jpg" alt="product" title="product">
+                <img width="50" height="50" src="img/product-40x40.png" alt="product" title="product">
                 <a class="productname" href="product.html"> Product Name</a>
                 <span class="procategory">Electronics</span>
                 <span class="price">$250</span>
               </li>
               <li>
-                <img width="50" height="50" src="img/prodcut-40x40.jpg" alt="product" title="product">
+                <img width="50" height="50" src="img/product-40x40.png" alt="product" title="product">
                 <a class="productname" href="product.html"> Product Name</a>
                 <span class="procategory">Electronics</span>
                 <span class="price">$250</span>
@@ -156,7 +156,7 @@
                           <a class="details" href="/products/viewDetails/${product.id}">DETAILS</a>
                         </div>
                         <div class="pricetag">
-                          <span class="spiral"></span><a href="#" class="productcart">ADD TO CART</a>
+                          <span class="spiral"></span><a href="/cart/add/${product.id}" class="productcart">ADD TO CART</a>
                           <div class="price">
                             <div class="pricenew">&pound; ${product.salesPrice}</div>
                             <div class="priceold">&pound; ${product.regularPrice}</div>
@@ -188,7 +188,7 @@
                             <a class="prdocutname" href="product.html">${product.name}</a>
                             <div class="productdiscrption"> ${product.description} </div>
                             <div class="pricetag">
-                              <span class="spiral"></span><a href="#" class="productcart">ADD TO CART</a>
+                              <span class="spiral"></span><a href="/cart/add/${product.id}" class="productcart">ADD TO CART</a>
                               <div class="price">
                                 <div class="pricenew">&pound; ${product.salesPrice}</div>
                                 <div class="priceold">&pound; ${product.regularPrice}</div>

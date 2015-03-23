@@ -6,9 +6,7 @@ import java.sql.Timestamp;
 /**
  * Created by Daveola on 2/16/2015.
  */
-@Entity
-@IdClass(CartitemsPK.class)
-@Table(name = "cartitem")
+
 public class Cartitem {
 
     @Id

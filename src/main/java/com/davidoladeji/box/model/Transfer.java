@@ -37,9 +37,6 @@ public class Transfer {
     private int transferStatusId;
 
 
-
-
-
     public Long getId() {
         return id;
     }

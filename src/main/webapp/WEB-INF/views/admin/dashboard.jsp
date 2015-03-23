@@ -36,21 +36,22 @@
             <div class="oneTwo">
                 <!-- Warehouses list widget -->
                 <div class="widget">
-                    <div class="title"><img src="img/icons/dark/users.png" alt="" class="titleIcon"/><h6>Warehouses</h6></div>
+                    <div class="title"><img src="img/icons/dark/users.png" alt="" class="titleIcon"/><h6>Warehouses</h6>
+                    </div>
                     <ul class="warehouses">
-                        <c:forEach  items="${warehousesList.subList(0,5)}" var="warehouse">
-                        <li>
-                            <a href="#" title="" class="floatL"><img src="img/icons/color/store.png" alt=""/></a>
+                        <c:forEach items="${warehousesList.subList(0,5)}" var="warehouse">
+                            <li>
+                                <a href="#" title="" class="floatL"><img src="img/icons/color/store.png" alt=""/></a>
 
-                            <div class="pInfo">
-                                <a href="#" title=""><strong>${warehouse.location.name}</strong></a>
-                                <i>${warehouse.codename}</i>
-                            </div>
-                            <div class="pLinks">
+                                <div class="pInfo">
+                                    <a href="#" title=""><strong>${warehouse.location.name}</strong></a>
+                                    <i>${warehouse.codename}</i>
+                                </div>
+                                <div class="pLinks">
 
-                            </div>
-                            <div class="clear"></div>
-                        </li>
+                                </div>
+                                <div class="clear"></div>
+                            </li>
                         </c:forEach>
                     </ul>
                 </div>
@@ -105,7 +106,8 @@
                         <div class="topIcons">
                             <a href="#" class="tipS" title="Download statement"><img src="img/icons/downloadTop.png"
                                                                                      alt=""/></a>
-                            <a href="#" class="tipS" title="Print invoice"><img src="img/icons/printTop.png" alt=""/></a>
+                            <a href="#" class="tipS" title="Print invoice"><img src="img/icons/printTop.png"
+                                                                                alt=""/></a>
                             <a href="#" class="tipS" title="Edit"><img src="img/icons/editTop.png" alt=""/></a>
                         </div>
                     </div>
@@ -216,53 +218,96 @@
                 <tbody>
 
                 <c:if test="${ordersList.size() > 0}">
-                <c:forEach items="${ordersList}" var="order" varStatus="loopStatus">
-                <tr class="gradeX">
-                    <td>${loopStatus.index+1}</td>
-                    <td>${order.account.firstname}, ${order.account.firstname}</td>
-                    <c:if test="${order.orderItems.size() != null || order.orderItems.size() != 0}">
-                    <td>${order.orderItems.size()}</td>
-                    </c:if>
-                    <c:if test="${order.orderItems.size() == null || order.orderItems.size() == 0}">
-                        <td>0</td>
-                    </c:if>
-                    <td>${order.orderStatus}</td>
-                    <td>${order.price}</td>
-                    <td>${order.warehouse.location.name}(${order.warehouse.codename})</td>
-                    <c:if test="${order.orderItems.size() !=0 && order.orderItems != null}">
+                    <c:forEach items="${ordersList}" var="order" varStatus="loopStatus">
 
-                        <c:forEach items="${order.orderItems}" var="orderitem">
-                            <ul>
-                                <l>${orderitem.product.name}</l>
-                                <l>${orderitem.price}</l>
-                                <l>${orderitem.quantity}</l>
 
-                                <c:if test="${orderitem.transfer.transferStatusId == 1}">
-                                    In final warehouse<br/>
-                                    Now at ${orderitem.transfer.destinationWarehouse}
-                                </c:if>
-                                <c:if test="${orderitem.transfer.transferStatusId == 2}">
-                                   Needs Transfer<br/>
-                                    From  ${orderitem.transfer.departureWarehouse}<br/>
-                                     ${orderitem.transfer.destinationWarehouse}
-                                </c:if>
-                                <c:if test="${orderitem.transfer.transferStatusId == 3}">
-                                    In Transit<br/>
-                                    From  ${orderitem.transfer.departureWarehouse}<b/>
-                                    ${orderitem.transfer.destinationWarehouse}
-                                </c:if>
-                                <c:if test="${orderitem.transfer.transferStatusId == 4}">
-                                    No need for transfer<br/>
-                                </c:if>
+                        <tr class="${loopStatus.index % 2 == 0 ? 'gradeA' : 'gradeC'}">
 
-                            </ul>
-                        </c:forEach>
+                            <!-- Column 1 SN -->
+                            <td>${loopStatus.index+1}</td>
 
-                    </c:if>
+                            <!-- Column 2 Customer name -->
+                            <td>${order.account.firstname}, ${order.account.firstname}</td>
 
-                    <td class="center">Actions</td>
-                </tr>
-                </c:forEach></c:if>
+                            <!-- Column 3 Number of Items -->
+
+
+                            <c:if test="${order.orderItem.size() != null && order.orderItem.size() != 0}">
+                                <td>There are: ${order.orderItem.size()} Items</td>
+                            </c:if>
+
+                            <c:if test="${order.orderItem.size() == 0}">
+                                <td>No Order Items</td>
+                            </c:if>
+
+
+                            <!-- Column 4 Status of the Order -->
+
+                            <c:if test="${order.orderStatus == 1}">
+                                <td>${orderstatuses.get(0).name}</td>
+                            </c:if>
+                            <c:if test="${order.orderStatus == 2}">
+                                <td>${orderstatuses.get(1).name}</td>
+                            </c:if>
+                            <c:if test="${order.orderStatus == 3}">
+                                <td>${orderstatuses.get(2).name}</td>
+                            </c:if>
+                            <c:if test="${order.orderStatus == 4}">
+                                <td>${orderstatuses.get(3).name}</td>
+                            </c:if>
+
+                            <!-- Column 5 Total Price of order -->
+                            <td>${order.price}</td>
+
+                            <!-- Column 6 Choice Ware house -->
+                            <td>${order.warehouse.location.name}(${order.warehouse.codename})</td>
+
+                            <!-- Column 7 Order Items -->
+                            <c:if test="${order.orderItem.size() !=0 && order.orderItem != null}">
+                                <td>
+                                    <c:forEach items="${order.orderItem}" var="orderitem">
+                                        <ul>
+                                            <l>${orderitem.product.name}</l>
+                                            <l>${orderitem.price}</l>
+                                            <l>${orderitem.quantity}</l>
+
+                                            <c:if test="${orderitem.transfer.transferStatusId == 1}">
+                                                ${transferstatuses.get(0).name}<br/>
+                                                Now at ${orderitem.transfer.destinationWarehouse}
+                                            </c:if>
+                                            <c:if test="${orderitem.transfer.transferStatusId == 2}">
+                                                ${transferstatuses.get(1).name}<br/>
+                                                From  ${orderitem.transfer.departureWarehouse}<br/>
+                                                ${orderitem.transfer.destinationWarehouse}
+                                            </c:if>
+                                            <c:if test="${orderitem.transfer.transferStatusId == 3}">
+                                                ${transferstatuses.get(2).name}<br/>
+                                                From  ${orderitem.transfer.departureWarehouse}<b/>
+                                                ${orderitem.transfer.destinationWarehouse}
+                                            </c:if>
+                                            <c:if test="${orderitem.transfer.transferStatusId == 4}">
+                                                ${transferstatuses.get(3).name}<br/>
+                                            </c:if>
+
+                                        </ul>
+                                    </c:forEach>
+                                </td>
+                            </c:if>
+
+                            <c:if test="${order.orderItem.size() ==0 || order.orderItem == null}">
+                                <td>
+                                    <div class="errormsg alert">
+                                        <strong>Error!</strong> No orderitem
+                                    </div>
+                                </td>
+                            </c:if>
+
+                            <!-- Column 8 Actions -->
+                            <td class="center">Actions</td>
+                        </tr>
+
+
+                    </c:forEach></c:if>
 
                 </tbody>
             </table>

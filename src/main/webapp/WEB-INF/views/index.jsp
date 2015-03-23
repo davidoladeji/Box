@@ -5,29 +5,7 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <%@ page session="true" %>
 
-<%@ include file="template/homeheader.html" %>
-<script type="application/javascript" scr="jquery-1.11.2.min.js">
-    $("#ajaxform").submit(function (e) {
-        $.ajax({
-            url: '/cart/add/{',
-            type: 'POST',
-            contentType: 'application/x-www-form-urlencoded',
-            data: $(this).serializeArray(),
-            dataType: 'json',
-            success: function (content) {
-                $("#cart").append(content.addToCartLayer);
-                $.fancybox({
-                    href: '#cart',
-                    showCloseButton: false,
-                    enableEscapeButton: false,
-                    hideOnOverlayClick: false
-                });
-            },
-            error: function (xht, status, ex) {
-                console.log("error : " + ex);//JSON.parse: bad escaped character
-            }
-        });
-</script>
+<%@ include file="template/homeheader.jsp" %>
 <!-- Header End -->
 <div id="maincontainer">
     <!-- Slider Start-->
@@ -62,6 +40,8 @@
                                 <br>
                                 <ul class="productpagecart">
                                     <li><a href="/products/viewDetails/${product.id}" class="cart">Add to Cart</a>
+                                    </li>
+                                    <li><a href="/cart/add/${product.id}" class="cart">Add to Cart</a>
                                     </li>
                                 </ul>
                             </div>
@@ -122,7 +102,7 @@
                                     <a class="details" href="/products/viewDetails/${product.id}">DETAILS</a>
                                 </div>
                                 <div class="pricetag">
-                                    <span class="spiral"></span><a href="/cart/add/" class="productcart">ADD TO CART</a>
+                                    <span class="spiral"></span><a href="/cart/add/${product.id}" class="productcart">ADD TO CART</a>
 
                                     <div class="price">
                                         <div class="pricenew">&pound; ${product.salesPrice}</div>
@@ -153,7 +133,7 @@
                                     <a class="details" href="/products/viewDetails/${product.id}">DETAILS</a>
                                 </div>
                                 <div class="pricetag">
-                                    <span class="spiral"></span><a methods="" href="/cart/add/" class="productcart">ADD TO CART</a>
+                                    <span class="spiral"></span><a methods="" href="/cart/add/${product.id}" class="productcart">ADD TO CART</a>
 
                                     <div class="price">
                                         <div class="pricenew">${product.salesPrice}</div>
@@ -177,7 +157,7 @@
                                             <a class="details" href="/products/viewDetails/${product.id}">DETAILS</a>
                                         </div>
                                         <div class="pricetag">
-                                            <span class="spiral"></span><a href="/cart/add/" class="productcart">ADD TO CART</a>
+                                            <span class="spiral"></span><a href="/cart/add/${product.id}" class="productcart">ADD TO CART</a>
 
                                             <div class="price">
                                                 <div class="pricenew">${product.salesPrice}</div>

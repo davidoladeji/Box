@@ -32,7 +32,7 @@ public class TransferController {
         List<Transfer> transferList = transferRepository.findAll();
         model.addObject("transferList", transferList);
 
-        model.setViewName("transfers");
+        model.setViewName("admin/transfers");
         return model;
     }
 
@@ -43,7 +43,7 @@ public class TransferController {
         List<Transfer> transferList = transferRepository.findAll();
         model.addObject("transferList", transferList);
 
-        model.setViewName("addTransfer");
+        model.setViewName("/admin/addTransfer");
         return model;
     }
 
@@ -54,7 +54,19 @@ public class TransferController {
         List<Transfer> transferList = transferRepository.findAll();
         model.addObject("transferList", transferList);
 
-        model.setViewName("addTransfer");
+        model.setViewName("/admin/transfers");
+        return model;
+    }
+
+
+    @RequestMapping(value = "/viewRoutes", method = RequestMethod.GET)
+    public ModelAndView viewRoutes(ModelAndView model) {
+        model.addObject("title", "Transfers Page");
+
+        List<Transfer> transferList = transferRepository.findAll();
+        model.addObject("transferList", transferList);
+
+        model.setViewName("/admin/allroutes");
         return model;
     }
 }

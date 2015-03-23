@@ -6,7 +6,7 @@
 <%@ page session="true" %>
 
 
-<%@ include file="template/specialHeader.html" %>
+<%@ include file="template/specialHeader.jsp" %>
 <!-- Header End -->
 
 <div id="maincontainer">

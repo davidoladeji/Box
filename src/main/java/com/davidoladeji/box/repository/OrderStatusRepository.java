@@ -1,6 +1,7 @@
 package com.davidoladeji.box.repository;
 
-import com.davidoladeji.box.model.Account;
+import com.davidoladeji.box.model.OrderStatus;
+import com.davidoladeji.box.model.Orders;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import javax.transaction.Transactional;
@@ -10,7 +11,7 @@ import javax.transaction.Transactional;
  */
 
 @Transactional
-public interface CustomerRepository extends JpaRepository<Account, Long> {
+public interface OrderStatusRepository extends JpaRepository<OrderStatus, Long> {
 
 
 }

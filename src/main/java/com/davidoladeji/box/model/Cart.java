@@ -1,90 +1,79 @@
 package com.davidoladeji.box.model;
 
-import javax.persistence.*;
-import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Daveola on 2/16/2015.
  */
-@Entity
-@Table(name = "cart")
+
+
 public class Cart {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
+    private static double VAT = 17.5;
 
+    private List<Orderitem> orderItems;
 
-    @Basic
-    @Column(name = "timestamp")
-    private Timestamp timestamp;
+    public Cart() {
+        super();
 
-    @Basic
-    @Column(name = "totalprice")
-    private String totalprice;
-
-    @Basic
-    @Column(name = "customer_id")
-    private int customerId;
-
-
-    public Long getId() {
-        return id;
+        this.orderItems = new ArrayList<Orderitem>();
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public double getTotal() {
+
+        double subTotal = 0.0;
+        if (getOrderItems() != null) {
+
+            for (Orderitem item : getOrderItems()) {
+                subTotal = subTotal + item.getTotalItemPrice();
+            }
+        }
+
+        double total = subTotal + ((subTotal * VAT) / 100);
+        return total;
+
     }
 
+    public double getVatTotal() {
 
-    public Timestamp getTimestamp() {
-        return timestamp;
+        double subTotal = 0.0;
+        if (getOrderItems() != null) {
+
+            for (Orderitem item : getOrderItems()) {
+                subTotal = subTotal + item.getTotalItemPrice();
+            }
+        }
+
+        double total = ((subTotal * VAT) / 100);
+        return total;
+
     }
 
-    public void setTimestamp(Timestamp timestamp) {
-        this.timestamp = timestamp;
+    public List<Orderitem> getOrderItems() {
+        return orderItems;
     }
 
+    public void addtOrderItems(Orderitem orderItem) {
 
-    public String getTotalprice() {
-        return totalprice;
+        if (orderItems == null) {
+            orderItems = new ArrayList<Orderitem>();
+        }
+        orderItems.add(orderItem);
     }
 
-    public void setTotalprice(String totalprice) {
-        this.totalprice = totalprice;
+    public double getSubTotal() {
+        double subTotal = 0.0;
+        if (getOrderItems() != null) {
+
+            for (Orderitem item : getOrderItems()) {
+                subTotal = subTotal + item.getTotalItemPrice();
+            }
+        }
+        return subTotal;
     }
 
-
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Cart cart = (Cart) o;
-
-        if (customerId != cart.customerId) return false;
-        if (id != cart.id) return false;
-        if (timestamp != null ? !timestamp.equals(cart.timestamp) : cart.timestamp != null) return false;
-        if (totalprice != null ? !totalprice.equals(cart.totalprice) : cart.totalprice != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (timestamp != null ? timestamp.hashCode() : 0);
-        result = 31 * result + (totalprice != null ? totalprice.hashCode() : 0);
-        result = 31 * result + customerId;
-        return result;
+    public void resetOrderItemList() {
+        this.orderItems = new ArrayList<Orderitem>();
     }
 }
