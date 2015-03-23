@@ -24,7 +24,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/products")
-public class HomeProductsController {
+public class ProductDetailController {
 
     @Autowired
     AccountRepository accountRepository;
