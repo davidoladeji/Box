@@ -18,7 +18,7 @@
     <link href="css/jquery.fancybox.css" rel="stylesheet">
     <link href="css/cloud-zoom.css" rel="stylesheet">
 
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="js//html5.js"></script>
 
 
 </head>
@@ -153,6 +153,9 @@
                     </security:authorize>
                     <security:authorize access="hasRole('ROLE_ADMIN') OR hasRole('ROLE_EMPLOYEE') OR hasRole('ROLE_DRIVER')">
                         <li><a href="/admin/dashboard">Admin</a></li>
+
+                        <li><a href="/profile">Welcome ${loggedInUser.username}</a>
+                        </li>
                     </security:authorize>
                 </ul>
             </nav>

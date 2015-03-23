@@ -1,3 +1,6 @@
+<%@ page import="com.davidoladeji.box.model.Orders" %>
+<%@ page import="com.davidoladeji.box.repository.OrderRepository" %>
+<%@ page import="org.springframework.beans.factory.annotation.Autowired" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
@@ -34,41 +37,17 @@
                 <tr>
                     <th style="width: 1%;" class="center">S/N</th>
                     <th>Transfer from</th>
-                    <th>Chosen Warhouse</th>
-                    <th>Distance</th>
-                    <th>Status</th>
-                    <th>Actions</th>
+                    <th style="width: 8%;" class="center">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 <!-- gradeA, gradeU, gradeX, gradeC -->
-                <c:forEach items="${transferList}" var="transfer" varStatus="loopStatus">
+                <c:forEach items="${orderitemPendingList}" var="orderitem" varStatus="loopStatus">
                         <tr class="{loopStatus.index % 2 == 0 ? 'gradeC' : 'gradeX'">
                             <td class="center">${loopStatus.index+1}</td>
-                            <td>${transfer.departureWarehouse}</td>
-                            <td>${transfer.destinationWarehouse}</td>
-                            <td class="center">${transfer.mileage}</td>
-                            <c:if test="${transfer.transferStatusId == 1}">
-                                <td class="success center">${transferStatusList.get(0).name}</td>
-                            </c:if>
-                            <c:if test="${transfer.transferStatusId == 2}">
-                                <td class="warning center">${transferStatusList.get(1).name}</td>
-                            </c:if>
-
-                            <c:if test="${transfer.transferStatusId == 3}">
-                                <td class="warning center">${transferStatusList.get(2).name}</td>
-                            </c:if>
-                            <c:if test="${transfer.transferStatusId == 4}">
-                                <td class="warning center">${transferStatusList.get(3).name}</td>
-                            </c:if>
-
-
-
-                            <td><a href="/admin/editTransfer/${transfer.id}"> <img src="img/icons/color/pencil.png" alt=""></a><a href="/admin/deleteTransfer/${transfer.id}"><img src="img/icons/color/cross.png" alt=""></a></td>
+                            <td>${orderitem.orders.warehouse.location.name}(${orderitem.orders.warehouse.codename})</td>
+                            <td><a href="/admin/editOrderItemTransfer/${orderitem.id}"> <img src="img/icons/color/pencil.png" alt=""></a><a href="/admin/deleteOrderItemTransfer/${orderitem.id}"><img src="img/icons/color/cross.png" alt=""></a></td>
                         </tr>
-
-
-
                 </c:forEach>
                 </tbody>
             </table>

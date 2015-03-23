@@ -110,33 +110,6 @@
       <index name="fk_Account_Gender1_idx" unique="false" columns="gender"/>
       <index name="id_idx" unique="false" columns="role_id"/>
     </table>
-    <table name="cart" schema="" catalog="box" type="TABLE">
-      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="timestamp" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
-      <column name="totalprice" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <exported-key name="cart_id" table="cartitem" schema="" catalog="box" columns="cart_id"/>
-    </table>
-    <table name="cartitem" schema="" catalog="box" type="TABLE">
-      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="cart_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="timestamp" sqlType="TIMESTAMP" precision="19" scale="0" nullable="true" jdbcType="93"/>
-      <column name="product_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="Products_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <primary-key name="PRIMARY" columns="id,cart_id,Products_id"/>
-      <foreign-key name="cart_id" columns="cart_id" ref-table="cart" ref-schema="" ref-catalog="box" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="fk_CartItems_Products1" columns="Products_id" ref-table="product" ref-schema="" ref-catalog="box" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <index name="cart_id_idx" unique="false" columns="cart_id"/>
-      <index name="fk_CartItems_Products1_idx" unique="false" columns="Products_id"/>
-    </table>
-    <table name="cartitems" schema="" catalog="box" type="TABLE">
-      <column name="Products_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <column name="cart_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="product_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
-      <column name="timestamp" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
-      <primary-key name="PRIMARY" columns="Products_id,id,cart_id"/>
-    </table>
     <table name="gender" schema="" catalog="box" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="name" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
@@ -164,9 +137,10 @@
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="orders_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="price" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8"/>
-      <column name="transfer_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="transferRequirement" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="quantity" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
       <column name="product_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="transfer_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
       <foreign-key name="order_id" columns="orders_id" ref-table="orders" ref-schema="" ref-catalog="box" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="orderitem_ibfk_1" columns="product_id" ref-table="product" ref-schema="" ref-catalog="box" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
@@ -177,7 +151,7 @@
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="order_status_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="price" sqlType="DOUBLE" precision="22" scale="0" nullable="true" jdbcType="8"/>
-      <column name="account_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="account_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="warehouse_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="order_date" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
       <primary-key name="PRIMARY" columns="id"/>
@@ -209,7 +183,6 @@
       <column name="featured" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
       <column name="totalstock" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
-      <exported-key name="fk_CartItems_Products1" table="cartitem" schema="" catalog="box" columns="Products_id"/>
       <exported-key name="orderitem_ibfk_1" table="orderitem" schema="" catalog="box" columns="product_id"/>
       <exported-key name="fk_Product_Stock_Products1" table="product_stock" schema="" catalog="box" columns="product_id"/>
     </table>

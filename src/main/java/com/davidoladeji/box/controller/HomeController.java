@@ -1,12 +1,10 @@
 package com.davidoladeji.box.controller;
 
 
-import com.davidoladeji.box.model.Account;
-import com.davidoladeji.box.model.Product;
-import com.davidoladeji.box.model.Search;
-import com.davidoladeji.box.model.Warehouse;
+import com.davidoladeji.box.model.*;
 import com.davidoladeji.box.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,6 +17,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.List;
 
@@ -40,7 +39,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/")
-@SessionAttributes({"countsList"})
+@SessionAttributes({"countsList", "loggedInUser"})
 public class HomeController {
 
 
@@ -60,33 +59,38 @@ public class HomeController {
     WarehouseRepository warehouseRepository;
 
 
+
+
+
+
     @RequestMapping(value = "index", method = RequestMethod.GET)
     public ModelAndView homePage(ModelAndView model, @ModelAttribute("productsearch") Search search, BindingResult bindingResult) {
         model.addObject("title", "Home page!");
         model.addObject("breadcrumb", "*");
 
 
-        /**
-         * Since this is the first page a logged in user hits as determined from spring security
-         * dispatch.
-         * Determine who the current user is via authentication details
-         */
-        Authentication auth = SecurityContextHolder.getContext()
-                .getAuthentication();
-
-        UserDetails userDetail = (UserDetails) auth.getPrincipal();
 
 
-        String username = userDetail.getUsername();
+            /**
+             * Since this is the first page a logged in user hits as determined from spring security
+             * dispatch.
+             * Determine who the current user is via authentication details
+             */
 
-        /**
-         * Find that user in the Accounts repository
-         * Then pass to the session as the customer Id.
-         */
+            Authentication auth = SecurityContextHolder.getContext()
+                    .getAuthentication();
+            String username = "anonymous";
+
+            if (!(auth instanceof AnonymousAuthenticationToken)) {
+                UserDetails userDetail = (UserDetails) auth.getPrincipal();
+                username = userDetail.getUsername();
+            }
 
 
-        Account logggedInAccount = accountRepository.findByUsername(username);
-        model.addObject("logggedInAccount", logggedInAccount);
+                Account loggedInUser = accountRepository.findByUsername(username);
+                model.addObject("loggedInUser", loggedInUser);
+
+
 
 
         /**
@@ -232,9 +236,15 @@ public class HomeController {
      */
 
     @RequestMapping(value = "track", method = RequestMethod.GET)
-    public ModelAndView trackingItemPage(ModelAndView model, @ModelAttribute("productsearch") Search search, BindingResult bindingResult) {
+    public ModelAndView trackingItemPage(ModelAndView model, HttpServletRequest request, @ModelAttribute("productsearch") Search search, BindingResult bindingResult) {
         model.addObject("title", "Track");
         model.addObject("breadcrumb", "Track");
+
+
+        Account account = (Account)request.getSession().getAttribute("loggedInUser");
+        List<Orders> customerOrdersList = orderRepository.findByAccount_Id(account.getId());
+
+        model.addObject("customerOrdersList", customerOrdersList);
 
         model.setViewName("tracking");
         return model;

@@ -28,6 +28,8 @@
                             <th class="price">Unit Price</th>
                             <th class="total">Total</th>
 
+
+
                         </tr>
                         <% if (currentCart != null){ %>
                         <% for (Orderitem item : currentCart.getOrderItems()){ %>
@@ -53,14 +55,16 @@
 
                         </tr>
                         <%}
+
                         }%>
+
                     </table>
-                </form>
-            </div>
+               <%-- </form>
+            </div>--%>
             <div class="cartoptionbox">
 
 
-                <form class="form-vertical form-inline" id="choseWarehouse">
+                <%--<form class="form-vertical form-inline" id="choseWarehouse">--%>
                     <h4 class="heading4"> Choose preferred warehouse.</h4>
                     <fieldset>
                         <div class="control-group">
@@ -68,18 +72,22 @@
 
                             <div class="controls">
 
-                                <select name="warehouseId" id="warehouseId" class="span3 cartcountry">
-                                    <c:forEach items="${warehousesList}" var="warehouse">
-                                        <option value="${warehouse.id}">
-                                                ${warehouse.location.name}
+
+                          <select name="warehouseId"  id="warehouseId" class="span3 cartcountry">
+                              <% for (Orderitem item : currentCart.getOrderItems()){ %>
+                                    <c:forEach items="${warehousesList}" var="onewarehouse">
+                                        <option label="${onewarehouse.location.name}" name="warehouseId" value="${onewarehouse.id}">
+
                                         </option>
                                     </c:forEach>
-                                </select>
+                          </select>
 
 
                             </div>
                         </div>
                     </fieldset>
+
+                </div>
                 </form>
             </div>
             <div class="container">
@@ -103,12 +111,15 @@
 </div>
 
 <script>
-    function submitForm(action, productId){
+    function submitForm(action, productId,warehouseId){
 
         var quantity = $('#quantity'+productId).val();
+        var warehouseId = $('#warehouseId').val();
         $('#updateForm').append('<input type="hidden" name="action" value="'+action+'" />');
         $('#updateForm').append('<input type="hidden" name="productId" value="'+productId+'" />');
         $('#updateForm').append('<input type="hidden" name="quantity" value="'+quantity+'" />');
+        $('#updateForm').append('<input type="hidden" name="warehouseId" value="'+warehouseId+'" />');
+
 
         $('#updateForm').submit();
     }x
@@ -117,9 +128,11 @@
     function submitCheckout(){
 
         var quantity = $('').val();
+        var warehouseId = $('#warehouseId').val();
         $('#updateForm').append('<input type="hidden" name="action" value="'+action+'" />');
         $('#updateForm').append('<input type="hidden" name="productId" value="'+productId+'" />');
         $('#updateForm').append('<input type="hidden" name="quantity" value="'+quantity+'" />');
+        $('#updateForm').append('<input type="hidden" name="warehouseId" value="'+warehouseId+'" />');
 
         $('#updateForm').submit();
     }

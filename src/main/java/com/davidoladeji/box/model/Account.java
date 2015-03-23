@@ -4,6 +4,7 @@ import com.davidoladeji.box.util.Encrypter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Daveola on 2/16/2015.
@@ -12,71 +13,45 @@ import java.util.Date;
 @Table(name = "account")
 public class Account {
 
+    @OneToMany
+    List<Orders> orders;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
-
-
     @Basic
     @Column(name = "staffid")
     private Long staffid;
-
     @Column(name = "role_id")
     private int roleId;
-
-
     @Column(name = "firstname")
     private String firstname;
-
-
     @Column(name = "surname")
     private String surname;
-
-
     @Column(name = "username")
     private String username;
-
-
     @Column(name = "email")
     private String email;
-
-
     @Column(name = "password")
     private String password;
-
-
     @Column(name = "gender")
     private int gender;
-
-
     @Column(name = "dob")
     private Date dob;
-
-
     @Column(name = "mobile")
     private String mobile;
-
-
     @Column(name = "postcode")
     private String postcode;
-
     @Column(name = "addresslineone")
     private String addresslineone;
-
     @Column(name = "addresslinetwo")
     private String addresslinetwo;
-
     @Column(name = "city")
     private String city;
-
     @Column(name = "country")
     private String country;
-
-
     @Column(name = "enabled")
     private boolean enabled;
-
 
     public Account() {
     }
@@ -227,4 +202,12 @@ public class Account {
         this.enabled = enabled;
     }
 
+
+    public List<Orders> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Orders> orders) {
+        this.orders = orders;
+    }
 }

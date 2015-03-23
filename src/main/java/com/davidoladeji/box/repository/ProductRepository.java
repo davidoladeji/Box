@@ -15,6 +15,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     List<Product> findByFeatured(boolean featured);
 
+    List<Product> findByFeaturedAndTotalstock(boolean featured, int totalstock);
+
     List<Product> findByName(String name);
 
 

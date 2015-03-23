@@ -1,7 +1,6 @@
 package com.davidoladeji.box.model;
 
 import javax.persistence.*;
-import java.util.List;
 
 /**
  * Created by Daveola on 2/16/2015.
@@ -11,8 +10,13 @@ import java.util.List;
 public class Orderitem {
 
 
-    @OneToMany
-    List<Orders> orders;
+    @OneToOne
+    Orders orders;
+
+
+    @OneToOne(optional = true)
+    Transfer transfer;
+
     @OneToOne
     private Product product;
     @Id
@@ -24,24 +28,19 @@ public class Orderitem {
     private Double price;
 
     @Basic
-    @Column(name = "orders_id")
-    private Long orders_id;
-
-    @Basic
-    @Column(name = "transfer_id", insertable = false, updatable = false)
-    private int transferId;
+    @Column(name = "transferRequirement")
+    private Long transferRequirement;
     @Column(name = "quantity")
     private int quantity;
     @Column(name = "product_id", insertable = false, updatable = false)
     private Long productId;
-    @OneToOne
-    private Transfer transfer;
+
 
     public Orderitem() {
     }
 
-    public Orderitem(Long orderId, Double price, int quantity, Long productId) {
-        this.orders_id = orderId;
+    public Orderitem(Orders orders, Double price, int quantity, Long productId) {
+        this.orders = orders;
         this.price = price;
 
         this.quantity = quantity;
@@ -70,22 +69,15 @@ public class Orderitem {
         this.price = price;
     }
 
-    public Long getOrders_id() {
-        return orders_id;
+
+
+    public Long getTransferRequirement() {
+        return transferRequirement;
     }
 
-    public void setOrders_id(Long orders_id) {
-        this.orders_id = orders_id;
+    public void setTransferRequirement(Long transferRequirement) {
+        this.transferRequirement = transferRequirement;
     }
-
-    public int getTransferId() {
-        return transferId;
-    }
-
-    public void setTransferId(int transferId) {
-        this.transferId = transferId;
-    }
-
 
     public int getQuantity() {
         return quantity;
@@ -105,14 +97,6 @@ public class Orderitem {
     }
 
 
-    public Transfer getTransfer() {
-        return transfer;
-    }
-
-    public void setTransfer(Transfer transfer) {
-        this.transfer = transfer;
-    }
-
     public Product getProduct() {
         return product;
     }
@@ -122,15 +106,24 @@ public class Orderitem {
     }
 
 
-    public List<Orders> getOrders() {
+    public Orders getOrders() {
         return orders;
     }
 
-    public void setOrders(List<Orders> orders) {
+    public void setOrders(Orders orders) {
         this.orders = orders;
     }
 
     public double getTotalItemPrice() {
         return this.getQuantity() * this.getPrice();
+    }
+
+
+    public Transfer getTransfer() {
+        return transfer;
+    }
+
+    public void setTransfer(Transfer transfer) {
+        this.transfer = transfer;
     }
 }

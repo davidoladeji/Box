@@ -6,9 +6,6 @@
         <class>com.davidoladeji.box.model.Account</class>
         <class>com.davidoladeji.box.model.Cart</class>
         <class>com.davidoladeji.box.model.Cartitem</class>
-        <class>com.davidoladeji.box.model.Customer</class>
-        <class>com.davidoladeji.box.model.Driver</class>
-        <class>com.davidoladeji.box.model.Employee</class>
         <class>com.davidoladeji.box.model.Gender</class>
         <class>com.davidoladeji.box.model.Location</class>
         <class>com.davidoladeji.box.model.Orders</class>
@@ -19,7 +16,6 @@
         <class>com.davidoladeji.box.model.Role</class>
         <class>com.davidoladeji.box.model.TransferStatus</class>
         <class>com.davidoladeji.box.model.Transfer</class>
-        <class>com.davidoladeji.box.model.Truck</class>
         <class>com.davidoladeji.box.model.Warehouse</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLInnoDBDialect"/>

@@ -34,9 +34,9 @@
                     <div class="formRow">
                         <label>Select Customer:<span class="req">*</span> </label>
                         <div class="formRight searchDrop">
-                            <form:select path="account.id" data-placeholder="Choose a Customer..." class="chzn-select" style="width:350px;" tabindex="2">
+                            <form:select path="account" data-placeholder="Choose a Customer..." class="chzn-select" style="width:350px;" tabindex="2">
                                 <c:forEach items="${customersList}" var="customer">
-                                    <form:option value="${customer.id}" label="${customer.firstname}, ${customer.surname}"/>
+                                    <form:option value="${customer}" label="${customer.firstname}, ${customer.surname}"/>
                                 </c:forEach>
                             </form:select>
                         <div class="clear"></div>

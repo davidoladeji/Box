@@ -4,6 +4,7 @@ import com.davidoladeji.box.model.Orderitem;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  * Created by Daveola on 2/16/2015.
@@ -11,6 +12,12 @@ import javax.transaction.Transactional;
 
 @Transactional
 public interface OrderitemRepository extends JpaRepository<Orderitem, Long> {
+
+    List<Orderitem> findByTransferId(Long transferId);
+
+    List<Orderitem> findByTransferRequirement(Long transferId);
+
+
 /**
 
  Extending JPArepository Translates to inheriting the following

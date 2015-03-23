@@ -50,23 +50,7 @@
             <div class="cartoptionbox">
 
 
-                <form class="form-vertical form-inline">
-                    <h4 class="heading4"> Choose preferred warehouse.</h4>
-                    <fieldset>
-                        <div class="control-group">
-                            <label class="control-label">Select Warehouse</label>
 
-                            <div class="controls">
-                                <select class="span3 cartcountry">
-                                    <option>Country:</option>
-                                    <option>United Kindom</option>
-                                    <option>United States</option>
-                                </select>
-                                <input type="submit" value="Get Quotes" class="btn btn-orange">
-                            </div>
-                        </div>
-                    </fieldset>
-                </form>
             </div>
             <div class="container">
                 <div class="pull-right">

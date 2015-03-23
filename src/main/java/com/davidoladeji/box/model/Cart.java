@@ -14,6 +14,8 @@ public class Cart {
 
     private List<Orderitem> orderItems;
 
+    private Long warehouseId;
+
     public Cart() {
         super();
 
@@ -75,5 +77,13 @@ public class Cart {
 
     public void resetOrderItemList() {
         this.orderItems = new ArrayList<Orderitem>();
+    }
+
+    public Long getWarehouseId() {
+        return warehouseId;
+    }
+
+    public void setWarehouseId(Long warehouseId) {
+        this.warehouseId = warehouseId;
     }
 }

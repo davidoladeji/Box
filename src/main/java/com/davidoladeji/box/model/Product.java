@@ -29,8 +29,12 @@ public class Product {
     private Double salesPrice;
     @Column(name = "itemsperbox")
     private int itemsperbox;
+
+
     @Column(name = "enabled")
     private boolean enabled;
+
+
     @Column(name = "featured")
     private boolean featured;
     @Column(name = "totalstock", nullable = true)
@@ -160,10 +164,17 @@ public class Product {
     @PostLoad
     public void doPostLoad() {
         this.setTotalstock(this.getTotalstock());
+
+        if (this.totalstock == 0) {
+            this.setEnabled(false);
+        }
     }
+
 
     @PrePersist
     public void doPrePersist() {
         this.setTotalstock(this.getTotalstock());
     }
+
+
 }

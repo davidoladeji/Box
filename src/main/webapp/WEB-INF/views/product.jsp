@@ -98,7 +98,7 @@
                                 </div>
                             </div>
                             <ul class="productpagecart">
-                                <li><input type="submit"  id="productId" name="productId"><a class="cart"  href="/cart/add/${product.id}">Add to Cart</a></input>
+                                <li><a class="cart"  href="/cart/add/${product.id}">Add to Cart</a></input>
                                 </li>
                             </ul>
                             </form>
@@ -148,7 +148,7 @@
         </div>
     </section>
   <!--  Related Products-->
-  <section id="related" class="row">
+<%--  <section id="related" class="row">
     <div class="container">
       <h1 class="heading1"><span class="maintext">Related Products</span><span class="subtext"> See Our Most featured Products</span></h1>
       <ul class="thumbnails">
@@ -163,7 +163,7 @@
               <a class="compare" href="#">COMPARE</a>
             </div>
             <div class="pricetag">
-              <span class="spiral"></span><a href="#" class="productcart">ADD TO CART</a>
+              <span class="spiral"></span><a href="/cart/add/${product.id}" class="productcart">ADD TO CART</a>
               <div class="price">
                 <div class="pricenew">$4459.00</div>
                 <div class="priceold">$5000.00</div>
@@ -173,7 +173,7 @@
         </li>
       </ul>
     </div>
-  </section>
+  </section>--%>
 
 </div>
 

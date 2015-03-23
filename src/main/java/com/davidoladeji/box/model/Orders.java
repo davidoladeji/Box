@@ -13,10 +13,13 @@ public class Orders {
 
     @OneToMany(cascade = CascadeType.ALL)
     List<Orderitem> orderItem;
-    @ManyToOne
-    Account account;
     @OneToOne
     Warehouse warehouse;
+
+    @OneToOne
+    Account account;
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -71,13 +74,6 @@ public class Orders {
         this.warehouse = warehouse;
     }
 
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
 
     public List<Orderitem> getOrderItem() {
         return orderItem;
@@ -85,5 +81,13 @@ public class Orders {
 
     public void setOrderItem(List<Orderitem> orderItem) {
         this.orderItem = orderItem;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }
