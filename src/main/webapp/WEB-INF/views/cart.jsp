@@ -59,36 +59,34 @@
                         }%>
 
                     </table>
+                 </form>   
                <%-- </form>
             </div>--%>
-            <div class="cartoptionbox">
+            	<div class="cartoptionbox">
+					
 
-
-                <%--<form class="form-vertical form-inline" id="choseWarehouse">--%>
-                    <h4 class="heading4"> Choose preferred warehouse.</h4>
-                    <fieldset>
-                        <div class="control-group">
-                            <label class="control-label">Select Warehouse</label>
-
-                            <div class="controls">
-
-
-                          <select name="warehouseId"  id="warehouseId" class="span3 cartcountry">
-                              <% for (Orderitem item : currentCart.getOrderItems()){ %>
+                <c:url var="checkOut" value="/checkout">  </c:url>
+	                <form method="get" action="${checkOut}" id="checkoutForm">
+	                    <h4 class="heading4"> Choose preferred warehouse.</h4>
+	                    <fieldset>
+	                        <div class="control-group">
+	                            <label class="control-label">Select Warehouse</label>
+	
+	                            <div class="controls">
+	
+	
+	                          <select name="warehouseId"  id="warehouseId" class="span3 cartcountry">
                                     <c:forEach items="${warehousesList}" var="onewarehouse">
-                                        <option label="${onewarehouse.location.name}" name="warehouseId" value="${onewarehouse.id}">
-
+                                        <option label="${onewarehouse.location.name}" value="${onewarehouse.id}">
                                         </option>
                                     </c:forEach>
-                          </select>
-
-
-                            </div>
-                        </div>
-                    </fieldset>
-
+	                          </select>
+	                            </div>
+	                        </div>
+	                    </fieldset>
+					</form>
                 </div>
-                </form>
+                
             </div>
             <div class="container">
                 <div class="pull-right">
@@ -97,10 +95,10 @@
 
                             <tr>
                                 <td><span class="extra bold totalamout">Total :</span></td>
-                                <td><span class="bold totalamout">$ <%= currentCart.getTotal() %></span></td>
+                                <td><span class="bold totalamout">$<%= currentCart.getTotal() %></span></td>
                             </tr>
                         </table>
-                        <a href="/checkout" class="btn btn-orange pull-right" >Check Out</a>
+                        <a href="javascript: submitCheckout();" class="btn btn-orange pull-right" >Check Out</a>
 
                         <a href="/index" class="btn btn-orange pull-right mr10">Continue Shopping</a>
                     </div>
@@ -122,19 +120,12 @@
 
 
         $('#updateForm').submit();
-    }x
+    }
 
 
     function submitCheckout(){
 
-        var quantity = $('').val();
-        var warehouseId = $('#warehouseId').val();
-        $('#updateForm').append('<input type="hidden" name="action" value="'+action+'" />');
-        $('#updateForm').append('<input type="hidden" name="productId" value="'+productId+'" />');
-        $('#updateForm').append('<input type="hidden" name="quantity" value="'+quantity+'" />');
-        $('#updateForm').append('<input type="hidden" name="warehouseId" value="'+warehouseId+'" />');
-
-        $('#updateForm').submit();
+        $('#checkoutForm').submit();
     }
 
 

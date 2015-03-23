@@ -20,12 +20,16 @@ public class RESTController {
     public
     @ResponseBody
     Distances calcDistance(@PathVariable("townone") String townone, @PathVariable("towntwo") String towntwo) {
+
+
         RestTemplate restTemplate = new RestTemplate();
         String url = "http://localhost:9000/calcdistance?dept={townone}&dest={towntwo}";
         Distances distances = restTemplate.getForObject(url, Distances.class, townone, towntwo);
         System.out.print(distances.toString());
         return distances;
     }
+
+
 
 
 }

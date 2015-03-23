@@ -125,8 +125,8 @@
 
                             <c:if test="${order.orderItem.size() ==0 || order.orderItem == null}">
                                 <td>
-                                    <div class="errormsg alert">
-                                        <strong>Error!</strong> No orderitem
+                                    <div class="warning">
+                                        No orderitem
                                     </div>
                                 </td>
                             </c:if>

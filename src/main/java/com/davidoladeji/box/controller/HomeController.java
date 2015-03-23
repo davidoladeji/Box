@@ -39,7 +39,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/")
-@SessionAttributes({"countsList", "loggedInUser"})
+@SessionAttributes({"loggedInUser"})
 public class HomeController {
 
 
@@ -124,88 +124,6 @@ public class HomeController {
     }
 
 
-    /**
-     * This is the default view since all users need to be authenticated
-     * @param model
-     * @param search
-     * @param bindingResult
-     * @return
-     */
-
-    @RequestMapping(value = {"", "login"}, method = RequestMethod.GET)
-    public ModelAndView loginPage(ModelAndView model, @ModelAttribute("productsearch") Search search, BindingResult bindingResult) {
-        model.addObject("title", "Login");
-        model.addObject("breadcrumb", "Login");
-
-
-        model.setViewName("login");
-        return model;
-    }
-
-
-    /**
-     * The page displayed when a user logs out
-     * @param model
-     * @param search
-     * @param result
-     * @return
-     */
-    @RequestMapping(value = "logout", method = RequestMethod.GET)
-    public ModelAndView logoutPage(ModelAndView model, @ModelAttribute("productsearch") Search search, BindingResult result) {
-        model.addObject("title", "Logout");
-        model.addObject("breadcrumb", "Logged out");
-
-        model.setViewName("logout");
-        return model;
-    }
-
-
-    /**
-     * This is the customer registration view
-     * all other users can only be created via the admin
-     *
-     * @param model
-     * @param account
-     * @param search
-     * @param result
-     * @return
-     */
-    @RequestMapping(value = "register", method = RequestMethod.GET)
-    public ModelAndView registerPage(ModelAndView model, @ModelAttribute("account") Account account, @ModelAttribute("productsearch") Search search, BindingResult result) {
-        model.addObject("title", "Register");
-        model.addObject("breadcrumb", "Register");
-
-        model.setViewName("register");
-        return model;
-    }
-
-
-    /**
-     * This is the customer registration action
-     * @param model
-     * @param account
-     * @param result
-     * @param redirectAttributes
-     * @return
-     */
-    @RequestMapping(value = "register", method = RequestMethod.POST)
-    public ModelAndView registerPost(ModelAndView model, @ModelAttribute("account") Account account, BindingResult result, final RedirectAttributes redirectAttributes) {
-        model.addObject("title", "Register");
-        model.addObject("breadcrumb", "Register");
-
-        // if (result.hasErrors()) {
-        //  model.setViewName("register");
-        //  return model;
-
-        //  }else{
-
-        accountRepository.save(account);
-        model.setViewName("redirect:/");
-        return model;
-        // }
-
-
-    }
 
     /**
      * This is the view where users can check their account details
@@ -227,47 +145,7 @@ public class HomeController {
     }
 
 
-    /**
-     * This provides the tracking view
-     * @param model
-     * @param search
-     * @param bindingResult
-     * @return
-     */
 
-    @RequestMapping(value = "track", method = RequestMethod.GET)
-    public ModelAndView trackingItemPage(ModelAndView model, HttpServletRequest request, @ModelAttribute("productsearch") Search search, BindingResult bindingResult) {
-        model.addObject("title", "Track");
-        model.addObject("breadcrumb", "Track");
-
-
-        Account account = (Account)request.getSession().getAttribute("loggedInUser");
-        List<Orders> customerOrdersList = orderRepository.findByAccount_Id(account.getId());
-
-        model.addObject("customerOrdersList", customerOrdersList);
-
-        model.setViewName("tracking");
-        return model;
-    }
-
-
-    /**
-     * This is the final checkout point
-     * @param model
-     * @param search
-     * @param bindingResult
-     * @return
-     */
-    @RequestMapping(value = "order", method = RequestMethod.GET)
-    public ModelAndView ordersPage(ModelAndView model, @ModelAttribute("productsearch") Search search, BindingResult bindingResult) {
-        model.addObject("title", "Order");
-        model.addObject("breadcrumb", "Order");
-
-        List<Warehouse> warehousesList = warehouseRepository.findAll();
-        model.addObject("warehousesList", warehousesList);
-        model.setViewName("orders");
-        return model;
-    }
 
 
 

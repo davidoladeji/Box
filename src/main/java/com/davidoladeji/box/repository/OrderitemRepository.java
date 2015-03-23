@@ -17,6 +17,8 @@ public interface OrderitemRepository extends JpaRepository<Orderitem, Long> {
 
     List<Orderitem> findByTransferRequirement(Long transferId);
 
+    List<Orderitem> findByOrders_Account_Id(Long accountId);
+
 
 /**
 

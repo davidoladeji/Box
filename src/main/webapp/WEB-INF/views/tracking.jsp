@@ -19,32 +19,79 @@
                 <table class="table table-striped table-bordered">
                     <tr>
                         <th class="image">Image</th>
-                        <th class="name">Product Name</th>
-                        <th class="model">Model</th>
-                        <th class="quantity">Qty</th>
-                        <th class="total">Action</th>
-                        <th class="price">Unit Price</th>
-                        <th class="total">Total</th>
+                        <th style="width: 30%" ><strong> Product Name </strong></th>
+                        <th style="width: 15%" > Order ID </th>
+                        <th style="width: 15%" > Status </th>
+                        <th style="width: 20%" > Status </th>
+                        <th style="width: 15%" > Status </th>
+                        <th style="width: 15%" > Status </th>
+                        <th style="width: 8%" > Warehouse </th>
+
 
                     </tr>
+
+                    <c:forEach items="${orderitemsList}" var="orderItem">
                     <tr>
-                        <td class="image"><a href="#"><img title="product" alt="product" src="img/product-40x40.png"
+                        <c:if test="${orderItem.transferRequirement ==  1}">
+
+                            <td class="image"><a href="#"><img title="product" alt="product" src="img/product-40x40.png"
                                                            height="50" width="50"></a></td>
-                        <td class="name"><a href="#">Jeans</a></td>
-                        <td class="model">Purchased Product</td>
-                        <td class="quantity"><input type="text" size="1" value="1" name="quantity[40]" class="span1">
-
-                        </td>
-                        <td class="total"><a href="#"><img class="tooltip-test" data-original-title="Update"
-                                                           src="img/update.png" alt=""></a>
-                            <a href="#"><img class="tooltip-test" data-original-title="Remove" src="img/remove.png"
-                                             alt=""></a></td>
 
 
-                        <td class="price">$120.68</td>
-                        <td class="total">$120.68</td>
+                            <td class="center">${orderItem.product.name}</td>
+                            <td class="center">${orderItem.orders.id}</td>
+                            <td class="center"><button class="btn  btn-success">Placed</button></td>
+                            <td class="center"><button class="btn">Being packed</button></td>
+                            <td class="center"><button class="btn">Dispatched</button></td>
+                            <td class="center"><button class="btn">Delivered</button></td>
+                            <td class="center">${orderItem.warehouse.location.name}, (${orderItem.warehouse.codename})</td>
+
+                        </c:if>
+
+                        <c:if test="${orderItem.transferRequirement ==  2}">
+                            <td class="image"><a href="#"><img title="product" alt="product" src="img/product-40x40.png"
+                                                               height="50" width="50"></a></td>
+
+                            <td class="center">${orderItem.product.name}</td>
+                            <td class="center">${orderItem.orders.id}</td>
+                            <td class="center"><button class="btn">Placed</button></td>
+                            <td class="center"><button class="btn btn-success">Being packed</button></td>
+                            <td class="center"><button class="btn">Dispatched</button></td>
+                            <td class="center"><button class="btn">Delivered</button></td>
+                            <td class="center">${orderItem.warehouse.location.name}, (${orderItem.warehouse.codename})</td>
+
+                        </c:if>
+
+                        <c:if test="${orderItem.transferRequirement ==  3}">
+                            <td class="image"><a href="#"><img title="product" alt="product" src="img/product-40x40.png"
+                                                                     height="50" width="50"></a></td>
+
+                            <td class="center">${orderItem.product.name}</td>
+                            <td class="center">${orderItem.orders.id}</td>
+                            <td class="center"><button class="btn">Placed</button></td>
+                            <td class="center"><button class="btn">Being packed</button></td>
+                            <td class="center"><button class="btn btn-success">Dispatched</button></td>
+                            <td class="center"><button class="btn">Delivered</button></td>
+                            <td class="center">${orderItem.warehouse.location.name}, (${orderItem.warehouse.codename})</td>
+
+                        </c:if>
+
+                        <c:if test="${orderItem.transferRequirement ==  4}">
+                            <td class="image"><a href="#"><img title="product" alt="product" src="img/product-40x40.png"
+                                                               height="50" width="50"></a></td>
+
+                            <td class="center">${orderItem.product.name}</td>
+                            <td class="center">${orderItem.orders.id}</td>
+                            <td class="center"><button class="btn">Placed</button></td>
+                            <td class="center"><button class="btn">Being packed</button></td>
+                            <td class="center"><button class="btn">Dispatched</button></td>
+                            <td class="center"><button class="btn btn-success">Delivered</button></td>
+                            <td class="center">${orderItem.warehouse.location.name}, (${orderItem.warehouse.codename})</td>
+
+                        </c:if>
 
                     </tr>
+                    </c:forEach>
                 </table>
             </div>
             <div class="cartoptionbox">
@@ -52,21 +99,7 @@
 
 
             </div>
-            <div class="container">
-                <div class="pull-right">
-                    <div class="span4 pull-right">
-                        <table class="table table-striped table-bordered ">
 
-                            <tr>
-                                <td><span class="extra bold totalamout">Total :</span></td>
-                                <td><span class="bold totalamout">&pound; 150.28</span></td>
-                            </tr>
-                        </table>
-                        <input type="submit" value="CheckOut" class="btn btn-orange pull-right">
-                        <input type="submit" value="Continue Shopping" class="btn btn-orange pull-right mr10">
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 </div>

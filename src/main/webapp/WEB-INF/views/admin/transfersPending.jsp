@@ -46,7 +46,7 @@
                         <tr class="{loopStatus.index % 2 == 0 ? 'gradeC' : 'gradeX'">
                             <td class="center">${loopStatus.index+1}</td>
                             <td>${orderitem.orders.warehouse.location.name}(${orderitem.orders.warehouse.codename})</td>
-                            <td><a href="/admin/editOrderItemTransfer/${orderitem.id}"> <img src="img/icons/color/pencil.png" alt=""></a><a href="/admin/deleteOrderItemTransfer/${orderitem.id}"><img src="img/icons/color/cross.png" alt=""></a></td>
+                            <td><a href="/admin/scheduleTransfer/${orderitem.id}"> <img src="img/icons/color/pencil.png" alt=""></a><a href="/admin/deleteOrderItemTransfer/${orderitem.id}"><img src="img/icons/color/cross.png" alt=""></a></td>
                         </tr>
                 </c:forEach>
                 </tbody>

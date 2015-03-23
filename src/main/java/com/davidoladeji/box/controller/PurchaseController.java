@@ -179,7 +179,8 @@ public class PurchaseController {
 
     @RequestMapping(value = "/checkout", method = RequestMethod.GET)
     public ModelAndView checkOut(ModelAndView model, HttpSession session
-            , @ModelAttribute("productsearch") Search search) {
+            , @ModelAttribute("productsearch") Search search,
+            @RequestParam(value = "warehouseId") Long warehouseId) {
 
 
 
@@ -195,10 +196,6 @@ public class PurchaseController {
 
 
         String username = userDetail.getUsername();
-
-
-
-
 
 
         /**
@@ -218,7 +215,7 @@ public class PurchaseController {
         } else {
 
 
-            //Long warehouseId = new Long(1);
+            currentCart.setWarehouseId(warehouseId);
 
 
             Orders order = new Orders();
@@ -226,19 +223,6 @@ public class PurchaseController {
             order.setOrderDate(new Timestamp(new Date().getTime()));
 
             order.setPrice(currentCart.getTotal());
-
-            System.out.println("---------------------------------------------------------");
-            System.out.println("---------------------------------------------------------");
-            System.out.println("---------------------------------------------------------");
-            System.out.println("---------------------------------------------------------");
-            System.out.println("---------------------------------------------------------");
-
-            System.out.println(currentCart.getWarehouseId());
-            System.out.println("---------------------------------------------------------");
-            System.out.println("---------------------------------------------------------");
-            System.out.println("---------------------------------------------------------");
-            System.out.println("---------------------------------------------------------");
-            System.out.println("---------------------------------------------------------");
 
             order.setWarehouse(warehouseRepository.findOne(currentCart.getWarehouseId()));
 

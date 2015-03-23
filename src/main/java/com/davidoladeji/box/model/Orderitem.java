@@ -10,9 +10,14 @@ import javax.persistence.*;
 public class Orderitem {
 
 
-    @OneToOne
+    @ManyToOne
     Orders orders;
 
+    @Column(name = "status")
+    private int status;
+
+    @OneToOne
+    Warehouse warehouse;
 
     @OneToOne(optional = true)
     Transfer transfer;
@@ -69,7 +74,13 @@ public class Orderitem {
         this.price = price;
     }
 
+    public int getStatus() {
+        return status;
+    }
 
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public Long getTransferRequirement() {
         return transferRequirement;
@@ -126,4 +137,15 @@ public class Orderitem {
     public void setTransfer(Transfer transfer) {
         this.transfer = transfer;
     }
+
+
+    public Warehouse getWarehouse() {
+        return warehouse;
+    }
+
+    public void setWarehouse(Warehouse warehouse) {
+        this.warehouse = warehouse;
+    }
+
+
 }

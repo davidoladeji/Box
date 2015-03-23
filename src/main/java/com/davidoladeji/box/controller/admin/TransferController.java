@@ -3,12 +3,11 @@ package com.davidoladeji.box.controller.admin;
 import com.davidoladeji.box.model.Orderitem;
 import com.davidoladeji.box.model.Transfer;
 import com.davidoladeji.box.model.TransferStatus;
-import com.davidoladeji.box.repository.AccountRepository;
-import com.davidoladeji.box.repository.OrderitemRepository;
-import com.davidoladeji.box.repository.TransferRepository;
-import com.davidoladeji.box.repository.TransferStatusRepository;
+import com.davidoladeji.box.model.Warehouse;
+import com.davidoladeji.box.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -35,6 +34,12 @@ public class TransferController {
 
     @Autowired
     TransferStatusRepository transferStatusRepository;
+
+    @Autowired
+    WarehouseRepository warehouseRepository;
+
+
+
 
     @RequestMapping(value = "/transfers", method = RequestMethod.GET)
     public ModelAndView adminTransfersPage(ModelAndView model) {
@@ -85,6 +90,24 @@ public class TransferController {
         model.setViewName("/admin/transfersPending");
         return model;
     }
+
+
+    @RequestMapping(value = "/scheduleTransfer/{id}", method = RequestMethod.GET)
+    public ModelAndView adminScheduleTransfer(ModelAndView model, @PathVariable("id")Long orderId) {
+        model.addObject("title", "Transfers Page");
+
+
+        List<Warehouse> warehouseList =  warehouseRepository.findAll();
+
+        List<Orderitem> orderitemPendingList = orderitemRepository.findByTransferRequirement(Long.parseLong("2"));
+        model.addObject("orderitemPendingList", orderitemPendingList);
+
+        model.setViewName("/admin/scheduleTransfer");
+        return model;
+    }
+
+
+
 
 
 
