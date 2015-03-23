@@ -7,6 +7,9 @@ import com.davidoladeji.box.model.Search;
 import com.davidoladeji.box.model.Warehouse;
 import com.davidoladeji.box.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -62,10 +65,52 @@ public class HomeController {
         model.addObject("title", "Home page!");
         model.addObject("breadcrumb", "*");
 
+
+        /**
+         * Since this is the first page a logged in user hits as determined from spring security
+         * dispatch.
+         * Determine who the current user is via authentication details
+         */
+        Authentication auth = SecurityContextHolder.getContext()
+                .getAuthentication();
+
+        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+
+
+        String username = userDetail.getUsername();
+
+        /**
+         * Find that user in the Accounts repository
+         * Then pass to the session as the customer Id.
+         */
+
+
+        Account logggedInAccount = accountRepository.findByUsername(username);
+        model.addObject("logggedInAccount", logggedInAccount);
+
+
+        /**
+         * add a search entity to the view
+         */
+
         model.addObject("productsearch", search);
+
+
+        /**
+         * Find products marked as featured and
+         *add to a list send to the Slider for display
+         *
+         */
+
         List<Product> featuredProductsList = productRepository.findByFeatured(true);
+
         model.addObject("featuredProductsList", featuredProductsList);
 
+
+        /**
+         * Pass along list of all products available to display latest products and featured products
+         * At bottom of index page
+         */
         List<Product> productsList = productRepository.findAll();
         model.addObject("productsList", productsList);
 
@@ -74,6 +119,14 @@ public class HomeController {
         return model;
     }
 
+
+    /**
+     * This is the default view since all users need to be authenticated
+     * @param model
+     * @param search
+     * @param bindingResult
+     * @return
+     */
 
     @RequestMapping(value = {"", "login"}, method = RequestMethod.GET)
     public ModelAndView loginPage(ModelAndView model, @ModelAttribute("productsearch") Search search, BindingResult bindingResult) {
@@ -85,6 +138,14 @@ public class HomeController {
         return model;
     }
 
+
+    /**
+     * The page displayed when a user logs out
+     * @param model
+     * @param search
+     * @param result
+     * @return
+     */
     @RequestMapping(value = "logout", method = RequestMethod.GET)
     public ModelAndView logoutPage(ModelAndView model, @ModelAttribute("productsearch") Search search, BindingResult result) {
         model.addObject("title", "Logout");
@@ -94,6 +155,17 @@ public class HomeController {
         return model;
     }
 
+
+    /**
+     * This is the customer registration view
+     * all other users can only be created via the admin
+     *
+     * @param model
+     * @param account
+     * @param search
+     * @param result
+     * @return
+     */
     @RequestMapping(value = "register", method = RequestMethod.GET)
     public ModelAndView registerPage(ModelAndView model, @ModelAttribute("account") Account account, @ModelAttribute("productsearch") Search search, BindingResult result) {
         model.addObject("title", "Register");
@@ -103,6 +175,15 @@ public class HomeController {
         return model;
     }
 
+
+    /**
+     * This is the customer registration action
+     * @param model
+     * @param account
+     * @param result
+     * @param redirectAttributes
+     * @return
+     */
     @RequestMapping(value = "register", method = RequestMethod.POST)
     public ModelAndView registerPost(ModelAndView model, @ModelAttribute("account") Account account, BindingResult result, final RedirectAttributes redirectAttributes) {
         model.addObject("title", "Register");
@@ -122,15 +203,33 @@ public class HomeController {
 
     }
 
+    /**
+     * This is the view where users can check their account details
+     * and also goto tracking page
+     * @param model
+     * @param search
+     * @param bindingResult
+     * @return
+     */
+
     @RequestMapping(value = "profile", method = RequestMethod.GET)
     public ModelAndView accountProfilePage(ModelAndView model, @ModelAttribute("productsearch") Search search, BindingResult bindingResult) {
         model.addObject("title", "Profile");
         model.addObject("breadcrumb", "Profile");
 
+
         model.setViewName("profile");
         return model;
     }
 
+
+    /**
+     * This provides the tracking view
+     * @param model
+     * @param search
+     * @param bindingResult
+     * @return
+     */
 
     @RequestMapping(value = "track", method = RequestMethod.GET)
     public ModelAndView trackingItemPage(ModelAndView model, @ModelAttribute("productsearch") Search search, BindingResult bindingResult) {
@@ -141,6 +240,14 @@ public class HomeController {
         return model;
     }
 
+
+    /**
+     * This is the final checkout point
+     * @param model
+     * @param search
+     * @param bindingResult
+     * @return
+     */
     @RequestMapping(value = "order", method = RequestMethod.GET)
     public ModelAndView ordersPage(ModelAndView model, @ModelAttribute("productsearch") Search search, BindingResult bindingResult) {
         model.addObject("title", "Order");
@@ -152,16 +259,7 @@ public class HomeController {
         return model;
     }
 
-    @RequestMapping(value = "cart", method = RequestMethod.GET)
-    public ModelAndView cartPage(ModelAndView model, @ModelAttribute("productsearch") Search search, BindingResult bindingResult) {
-        model.addObject("title", "Cart");
-        model.addObject("breadcrumb", "Cart");
 
-        List<Warehouse> warehousesList = warehouseRepository.findAll();
-        model.addObject("warehousesList", warehousesList);
-        model.setViewName("cart");
-        return model;
-    }
 
     @RequestMapping(value = "403", method = RequestMethod.GET)
     public ModelAndView accessDenied(ModelAndView model, Principal user) {

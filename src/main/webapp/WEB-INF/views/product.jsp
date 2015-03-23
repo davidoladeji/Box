@@ -84,22 +84,24 @@
                                     <li class="off"></li>
                                 </ul>
                             </div>
+                            <form action ="/cart/add/${product.id}" method = "post">
                             <div class="quantitybox">
 
                                 <div class="clear"></div>
                                 <div class="control-group">
-                                    <div class="controls"><%--
-                                        <form:label path="quanity"></form:label>
-                                        <form:input path="quanity" name="quamtity"/>--%>
+                                    <div class="controls">
+
+                                      <input type="text" id="quantity" name="quantity" value="1"/>
 
 
                                     </div>
                                 </div>
                             </div>
                             <ul class="productpagecart">
-                                <li><a class="cart" href="/cart/add/">Add to Cart</a>
+                                <li><input type="submit"  id="productId" name="productId"><a class="cart"  href="/cart/add/${product.id}">Add to Cart</a></input>
                                 </li>
                             </ul>
+                            </form>
                             <!-- Product Description tab & comments-->
                             <div class="productdesc">
                                 <ul class="nav nav-tabs" id="myTab">

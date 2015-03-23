@@ -39,7 +39,7 @@
                                 </div>
                                 <br>
                                 <ul class="productpagecart">
-                                    <li><a href="/products/viewDetails/${product.id}" class="cart">Add to Cart</a>
+                                    <li><a href="/products/viewDetails/${product.id}" class="cart">View Details</a>
                                     </li>
                                     <li><a href="/cart/add/${product.id}" class="cart">Add to Cart</a>
                                     </li>

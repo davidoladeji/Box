@@ -13,6 +13,10 @@ import java.util.List;
 
 /**
  * Created by Daveola on 3/17/2015.
+ *
+ * Provides search functionality
+ *
+ * Can be Improved to use criteria function and more
  */
 
 @Controller
