@@ -35,8 +35,11 @@ public class Orderitem {
     @Basic
     @Column(name = "transferRequirement")
     private Long transferRequirement;
+
+
     @Column(name = "quantity")
     private int quantity;
+
     @Column(name = "product_id", insertable = false, updatable = false)
     private Long productId;
 
