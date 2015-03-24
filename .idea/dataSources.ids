@@ -189,9 +189,8 @@
       <exported-key name="fk_Product_Stock_Products1" table="product_stock" schema="" catalog="box" columns="product_id"/>
     </table>
     <table name="product_product_stock" schema="" catalog="box" type="TABLE">
-      <column name="product_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <column name="productStock_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
-      <index name="UK_it2k1bqp6uoov17i9m3ki8oi1" unique="true" columns="productStock_id"/>
+      <column name="product_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="productStock_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
     </table>
     <table name="product_stock" schema="" catalog="box" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>

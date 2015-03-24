@@ -11,7 +11,7 @@
 <div id="maincontainer">
     <section id="product">
         <div class="container">
-            <h1 class="heading1"><span class="maintext"> You Current Orde</span><span class="subtext"> All items in your  Shopping Cart</span>
+            <h1 class="heading1"><span class="maintext"> Shopping Cart</span><span class="subtext"> All items in your  Shopping Cart</span>
             </h1>
             <!-- Cart-->
             <div class="cart-info">
@@ -27,6 +27,8 @@
                             <th class="total">Action</th>
                             <th class="price">Unit Price</th>
                             <th class="total">Total</th>
+
+
 
                         </tr>
                         <% if (currentCart != null){ %>
@@ -53,36 +55,38 @@
 
                         </tr>
                         <%}
+
                         }%>
+
                     </table>
                 </form>
-            </div>
-            <div class="cartoptionbox">
+                <%-- </form>
+             </div>--%>
+                <div class="cartoptionbox">
 
 
-                <c:url var="checkOut" value="/checkout">  </c:url>
-	                <form method="get" action="${checkOut}" id="checkoutForm">
-	                    <h4 class="heading4"> Choose preferred warehouse.</h4>
-	                    <fieldset>
-	                        <div class="control-group">
-	                            <label class="control-label">Select Warehouse</label>
-	
-	                            <div class="controls">
-	
-	
-	                          <select name="warehouseId"  id="warehouseId" class="span3 cartcountry">
-                                    <c:forEach items="${warehousesList}" var="onewarehouse">
-                                        <option label="${onewarehouse.location.name}" value="${onewarehouse.id}">
-                                        </option>
-                                    </c:forEach>
-	                          </select>
-	                            </div>
-	                        </div>
-	                    </fieldset>
-					</form>
-                
-                
-                
+                    <c:url var="checkOut" value="/checkout">  </c:url>
+                    <form method="get" action="${checkOut}" id="checkoutForm">
+                        <h4 class="heading4"> Choose preferred warehouse.</h4>
+                        <fieldset>
+                            <div class="control-group">
+                                <label class="control-label">Select Warehouse</label>
+
+                                <div class="controls">
+
+
+                                    <select name="warehouseId"  id="warehouseId" class="span3 cartcountry">
+                                        <c:forEach items="${warehousesList}" var="onewarehouse">
+                                            <option label="${onewarehouse.location.name}" value="${onewarehouse.id}">
+                                            </option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+
             </div>
             <div class="container">
                 <div class="pull-right">
@@ -91,10 +95,11 @@
 
                             <tr>
                                 <td><span class="extra bold totalamout">Total :</span></td>
-                                <td><span class="bold totalamout">$ <%= currentCart.getTotal() %></span></td>
+                                <td><span class="bold totalamout">$<%= currentCart.getTotal() %></span></td>
                             </tr>
                         </table>
                         <a href="javascript: submitCheckout();" class="btn btn-orange pull-right" >Check Out</a>
+
                     </div>
                 </div>
             </div>
@@ -103,12 +108,15 @@
 </div>
 
 <script>
-    function submitForm(action, productId){
+    function submitForm(action, productId,warehouseId){
 
         var quantity = $('#quantity'+productId).val();
+        var warehouseId = $('#warehouseId').val();
         $('#updateForm').append('<input type="hidden" name="action" value="'+action+'" />');
         $('#updateForm').append('<input type="hidden" name="productId" value="'+productId+'" />');
         $('#updateForm').append('<input type="hidden" name="quantity" value="'+quantity+'" />');
+        $('#updateForm').append('<input type="hidden" name="warehouseId" value="'+warehouseId+'" />');
+
 
         $('#updateForm').submit();
     }

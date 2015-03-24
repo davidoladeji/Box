@@ -199,7 +199,7 @@
 
 
         <!-- Dynamic table -->
-<%--        <div class="widget">
+        <div class="widget">
             <div class="title"><img src="img/icons/dark/full2.png" alt="" class="titleIcon"/><h6>All Orders</h6>
             </div>
             <table cellpadding="0" cellspacing="0" border="0" class="display dTable">
@@ -296,8 +296,8 @@
 
                             <c:if test="${order.orderItem.size() ==0 || order.orderItem == null}">
                                 <td>
-                                    <div class="errormsg alert">
-                                        <strong>Error!</strong> No orderitem
+                                    <div >
+                                        No orderitem
                                     </div>
                                 </td>
                             </c:if>
@@ -311,7 +311,7 @@
 
                 </tbody>
             </table>
-        </div>--%>
+        </div>
 
     </div>
 

@@ -77,10 +77,6 @@
 
                                     <% for (Orderitem item : currentCart.getOrderItems()){ %>
                                     <tr>
-                                        <td class="image"><a href="product.html"><img width="50" height="50"
-                                                                                      src="img/prodcut-40x40.png"
-                                                                                      alt="product" title="product"></a>
-                                        </td>
                                         <td class="name"><a href="product.html"><%= item.getProduct().getName() %></a></td>
                                         <td class="quantity">x&nbsp;<%= item.getQuantity() %></td>
                                         <td class="total">$<%= item.getTotalItemPrice() %></td>
@@ -153,10 +149,10 @@
                     </security:authorize>
                     <security:authorize access="hasRole('ROLE_ADMIN') OR hasRole('ROLE_EMPLOYEE') OR hasRole('ROLE_DRIVER')">
                         <li><a href="/admin/dashboard">Admin</a></li>
-
-                        <li><a href="/profile">Welcome ${loggedInUser.username}</a>
-                        </li>
                     </security:authorize>
+                    <security:authorize access="hasRole('ROLE_ADMIN') OR hasRole('ROLE_USER') OR hasRole('ROLE_EMPLOYEE') OR hasRole('ROLE_DRIVER')">
+                    <li><a href="/profile">Welcome ${loggedInUser.username}</a>
+                    </li></security:authorize>
                 </ul>
             </nav>
         </div>

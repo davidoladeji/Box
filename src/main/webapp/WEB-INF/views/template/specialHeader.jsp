@@ -46,11 +46,11 @@
                                 <ul class="nav">
                                     <li><a class="home active" href="#">Home</a>
                                     </li><security:authorize access="hasRole('ROLE_ADMIN') OR hasRole('ROLE_USER') OR hasRole('ROLE_EMPLOYEE') OR hasRole('ROLE_DRIVER')">
-                                    <li><a class="/profile" href="/profile">My Account</a>
+                                    <li><a class="myaccount" href="/profile">My Account</a>
                                     </li>
-                                    <li><a class="/cart" href="/cart">Shopping Cart</a>
+                                    <li><a class="shoppingcart" href="/cart">Shopping Cart</a>
                                     </li>
-                                    <li><a class="/order" href="/order">CheckOut</a>
+                                    <li><a class="checkout" href="/order">CheckOut</a>
                                     </li></security:authorize>
                                 </ul>
                             </div>

@@ -1,6 +1,7 @@
 package com.davidoladeji.box.controller.admin;
 
 
+import com.davidoladeji.box.model.Orders;
 import com.davidoladeji.box.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -86,9 +87,26 @@ public class AdminController {
         model.addObject("currentUsername", currentUsername.getName());
 
 
+        List<Orders> ordersList = orderRepository.findAll();
+
+        if (ordersList.size() >= 1){
+            int count = 0;
+            double allOrderPriceTotal = 0.0;
+            while (ordersList.listIterator().hasNext() && count < ordersList.size()){
+
+                allOrderPriceTotal += ordersList.listIterator().next().getPrice();
+                count++;
+            }
+            model.addObject("allOrderPriceTotal", allOrderPriceTotal);
+        }else{
+            //Do nothing
+        }
+
+
+
         model.addObject("orderstatuses", orderStatusRepository.findAll());
         model.addObject("transferstatuses", transferStatusRepository.findAll());
-        model.addObject("ordersList", orderRepository.findAll());
+        model.addObject("ordersList", ordersList);
         model.addObject("warehousesList", warehouseRepository.findAll());
         model.setViewName("admin/dashboard");
         return model;
