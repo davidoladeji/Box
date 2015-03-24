@@ -19,11 +19,24 @@
         <class>com.davidoladeji.box.model.Warehouse</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLInnoDBDialect"/>
-            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
-            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/box"/>
 
-            <property name="hibernate.connection.username" value="daveola"/>
-            <property name="hibernate.connection.password" value="mydream"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+
+            <!--<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/box"/>-->
+            <property name="hibernate.connection.url" value="jdbc:mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/box"/>
+
+
+
+            <!--<property name="hibernate.connection.username" value="daveola"/>-->
+            <property name="hibernate.connection.username" value="adminIZ4Qzpi"/>
+
+
+
+            <!--<property name="hibernate.connection.password" value="mydream"/>-->
+            <property name="hibernate.connection.password" value="_TjjUm8kxp9A"/>
+
+
+
             <property name="hibernate.max_fetch_depth" value="5"/>
             <property name="hibernate.show_sql" value="true"/>
 
