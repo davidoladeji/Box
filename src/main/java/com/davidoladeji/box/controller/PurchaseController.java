@@ -310,13 +310,6 @@ public class PurchaseController {
             orderRepository.saveAndFlush(order);
 
 
-
-
-
-
-            // 4. save Orders
-        // TODO: Move the date timestamp to the server side instead of JSP
-
             model.setViewName("successPage");
         }
         session.removeAttribute("cart");
